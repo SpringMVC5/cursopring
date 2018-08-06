@@ -4,25 +4,39 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-@Entity
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class User {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
-	
+	private String id;
+
 	private String name;
-	
+
 	private String email;
-	
-	@ManyToMany
+
 	private Set<Role> roles;
 
-	public Integer getId() {
+	public User() {
+
+	}
+
+	public User(String name, String email) {
+		this.name = name;
+		this.email = email;
+	}
+	
+	@Override
+	public String toString() {
+		return "Id: " + this.id + " name: " + this.name + " email: " + this.email;
+	}
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -49,9 +63,5 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	
-	
-	
 
 }
